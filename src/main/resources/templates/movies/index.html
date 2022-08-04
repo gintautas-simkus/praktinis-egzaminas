@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Filmai</title>
+		<div th:replace='_head'></div>
+	</head>
+	<body class='container'>
+		<div class='row'></div>
+			<div class='col-2'></div>
+			<div class='col-8'>
+				<h3>Filmai</h3>
+				<form action="" method='get'>
+					<input type='text' name='search' placeholder="Ieškoti" th:value="${param.search}">
+					<input type='submit' value='Filtruoti'>
+				</form>
+				<table>
+					<tr>
+						<th>Pavadinimas</th>
+						<th>IMDB reitingas</th>
+						<th>Kategorija</th>
+					</tr>
+					<tr class='irasas' th:each='movie : ${movies}'>
+						<td><a th:text='${movie.getTitle()}' th:href="@{'/movies/' + ${movie.getId()}}"></a></td>
+						<td th:text='${movie.getImdbScore()}'></td>
+						<td th:text='${movie.getCategory().getName()}'></td>
+					</tr>
+				</table>
+			<div class='col-2'></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kategorijos</title>
+		<div th:replace='_head'></div>
+	</head>
+	<body class='container'>
+		<div class='row'>
+			<div class='col-2'></div>
+			<div class='col-8'>
+				<div th:replace='_menu'></div>
+				<form action='/categories' method='post' class='form-horizontal'>
+					<div class='row'>
+						<div class='col-10'>
+							<input type='text' name='name' required placeholder='Pavadinimas' class='form-control' autofocus="autofocus">
+						</div>
+						<div class='col-2'>
+							<input type='submit' value='Pridėti' class='btn btn-primary'>
+						</div>
+					</div>
+					<input type='hidden' name='_csrf' th:value='${_csrf.token}'>
+				</form>
+				<h3>Kategorijos</h3>
+				<table>
+					<tr>
+						<th>Pavadinimas</th>
+						<th>Veiksmai</th>
+					</tr>
+					<tr class='irasas' th:each='cat : ${categories}'>
+						<td th:text='${cat.getName()}'></td>
+						<td>
+							<a href='/categories/delete' th:data-id='${cat.getId()}' th:data-token='${_csrf.token}' class='trinti'>Trinti</a>
+						</td>
+					</tr>
+				</table>
+			<div class='col-2'></div>
+		</div>
+	</body>
+</html>

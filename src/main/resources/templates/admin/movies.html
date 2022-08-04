@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Filmai</title>
+		<div th:replace='_head'></div>
+	</head>
+	<body class='container'>
+		<div class='row'>
+			<div class='col-2'></div>
+			<div class='col-8'>
+				<div th:replace='_menu'></div>
+				<form action='/movies' method='post' class='form-horizontal'>
+					<div class='row'>
+						<div class='col-10'>
+							<input type='text' name='title' required placeholder='Pavadinimas' class='form-control' autofocus="autofocus">
+							<input type='text' name='description' required placeholder='Aprašas' class='form-control'>
+							<input type='number' name='imdb_score' required placeholder='IMDB reitingas' class='form-control' min='1' max='10' step='0.1'>
+							<select name='category_id' class='form-control'>
+								<option th:each="c : ${categories}" th:text="${c.getName()}" th:value="${c.getId()}"></option>
+							</select>
+						</div>
+						<div class='col-2'>
+							<input type='submit' value='Pridėti' class='btn btn-primary'>
+						</div>
+					</div>
+					<input type='hidden' name='_csrf' th:value='${_csrf.token}'>
+				</form>
+				<br>
+				<h3>Filmai</h3>
+				<table>
+					<tr>
+						<th>Pavadinimas</th>
+						<th>Aprašas</th>
+						<th>IMDB reitingas</th>
+						<th>Kategorija</th>
+						<th>Veiksmai</th>
+					</tr>
+					<tr class='irasas' th:each='movie : ${movies}'>
+						<td th:text='${movie.getTitle()}'></td>
+						<td th:text='${movie.getDescription()}'></td>
+						<td th:text='${movie.getImdbScore()}'></td>
+						<td th:text='${movie.getCategory().getName()}'></td>
+						<td>
+							<a href='/movies/delete' th:data-id='${movie.getId()}' th:data-token='${_csrf.token}' class='trinti'>Trinti</a>
+						</td>
+					</tr>
+				</table>
+			<div class='col-2'></div>
+		</div>
+	</body>
+</html>

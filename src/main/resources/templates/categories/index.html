@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Filmų kategorijos</title>
+		<div th:replace='_head'></div>
+	</head>
+	<body class='container'>
+		<div class='row'></div>
+			<div class='col-2'></div>
+			<div class='col-8'>
+				<h3>Filmų kategorijos</h3>
+				<ul>
+					<li class='irasas' th:each='cat : ${categories}' th:text="${cat.getName()}"></li>
+				</ul>
+				<table>
+					<tr>
+						<th>Pavadinimas</th>
+						<th>Veiksmai</th>
+					</tr>
+					<tr class='irasas' th:each='cat : ${categories}'>
+						<td th:text='${cat.getName()}'></td>
+						<td th:text='${school.getCode()}'></td>
+					</tr>
+				</table>
+			<div class='col-2'></div>
+		</div>
+	</body>
+</html>

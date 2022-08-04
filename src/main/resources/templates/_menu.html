@@ -1,0 +1,13 @@
+<ul id='menu'>
+	<li>
+		<a href='/admin/categories'>Kategorijos</a>
+	</li>
+	<li>
+		<a href='/admin/movies'>Filmai</a>
+	</li>
+	<li th:if='${#httpServletRequest.remoteUser}'>
+		<a th:inline='text' href='/logout' id='logout_link' th:data-token='${_csrf.token}'>
+			Atsijungti ([[${#httpServletRequest.remoteUser}]])
+		</a>
+	</li>
+</ul>

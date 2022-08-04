@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title th:text="${movie.getTitle()}"></title>
+		<div th:replace='_head'></div>
+	</head>
+	<body class='container'>
+		<div class='row'>
+			<div class='col-2'></div>
+			<div class='col-8'>
+				<h3 th:text='${movie.getTitle()}'></h3>
+				<h5 th:text="${movie.getDescription()}"></h5>
+				<strong>Kategorija:</strong>
+				<span th:text='${movie.getCategory().getName()}'></span>
+				<strong>IMDB reitingas:</strong>
+				<span th:text='${movie.getImdbScore()}'></span>
+				<form action='/comments' method='post'>
+					<textarea name='body' placeholder="Tavo komentaras" class='form-control'></textarea>
+					<input type='hidden' name='movie_id' th:value="${movie.getId()}">
+					<input type='hidden' name='_csrf' th:value='${_csrf.token}'>
+					<input type='submit' class='btn btn-primary' value="Komentuoti">
+				</form>
+				<div th:each='comment : ${movie.getComments()}'>
+					<strong th:text='${comment.getUser().getName()}'></strong>
+					<p th:text="${comment.getBody()}"></p>
+				</div>
+			<div class='col-2'></div>
+		</div>
+	</body>
+</html>
